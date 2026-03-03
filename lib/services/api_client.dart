@@ -421,7 +421,7 @@ class ApiClient {
 
   // ---------- Products ----------
   Future<int> createProduct(dynamic req) async {
-    final res = await _dio.post('api/products', data: _body(req));
+    final res = await _dio.post(AppConfig.createProductPath, data: _body(req));
     final m = res.data;
     if (m is Map && m['id'] != null) return (m['id'] as num).toInt();
     throw DioException(
@@ -432,7 +432,7 @@ class ApiClient {
   }
 
   Future<void> updateProduct(int id, dynamic req) async {
-    final res = await _dio.put('api/products/$id', data: _body(req));
+    final res = await _dio.put(AppConfig.updateProductPath('$id'), data: _body(req));
     if ((res.statusCode ?? 200) >= 400) {
       throw DioException(
         requestOptions: res.requestOptions,
@@ -443,7 +443,7 @@ class ApiClient {
   }
 
   Future<void> deleteProduct(int id) async {
-    final res = await _dio.delete('api/products/$id');
+    final res = await _dio.delete(AppConfig.updateProductPath('$id'));
     if ((res.statusCode ?? 200) >= 400) {
       throw DioException(
         requestOptions: res.requestOptions,
@@ -460,7 +460,7 @@ class ApiClient {
     int page = 1,
   }) async {
     final res = await _dio.get(
-      'api/products/$productId/variants',
+      AppConfig.productVariantsPath('$productId'),
       queryParameters: {
         if (q != null && q.isNotEmpty) 'q': q,
         'page': page,
@@ -472,8 +472,11 @@ class ApiClient {
   }
 
   Future<int> createVariant(int productId, dynamic req) async {
-    final res =
-        await _dio.post('api/products/$productId/variants', data: _body(req));
+      final res =
+        await _dio.post(
+          AppConfig.productVariantsPath('$productId'),
+          data: _body(req),
+        );
     final m = res.data;
     if (m is Map && m['id'] != null) return (m['id'] as num).toInt();
     throw DioException(

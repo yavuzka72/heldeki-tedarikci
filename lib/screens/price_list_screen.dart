@@ -951,7 +951,8 @@ class _PriceListScreenState extends State<PriceListScreen> {
           if (form.categoryId != null) 'category_id': form.categoryId,
           'active': true,
         };
-        final created2 = await dio.post('api/products', data: fallbackPayload);
+        final created2 =
+            await dio.post(AppConfig.createProductPath, data: fallbackPayload);
         productId = _asInt(
           (created2.data is Map && created2.data['id'] != null)
               ? created2.data['id']

@@ -107330,7 +107330,7 @@ if(g!=null)J.dP(a0,"category_id",g)
 J.dP(a0,"active",!0)
 a1=a0
 s=18
-return A.u(l.ha("api/products",a1,b2),$async$mO)
+return A.u(l.ha("products",a1,b2),$async$mO)
 case 18:a2=c0
 g=t.f
 if(g.b(a2.a)&&J.ac(a2.a,"id")!=null)g=J.ac(a2.a,"id")
@@ -109175,7 +109175,7 @@ var $async$zj=A.B(function(c,d){if(c===1)return A.C(d,r)
 while(true)switch(s){case 0:o=q.a
 o===$&&A.b()
 s=2
-return A.u(o.z0("api/products/"+a,null,q.acd(b),null,null,A.aQy("PUT",null),null,t.z),$async$zj)
+return A.u(o.z0("products/"+a,null,q.acd(b),null,null,A.aQy("PUT",null),null,t.z),$async$zj)
 case 2:p=d
 o=p.c
 if((o==null?200:o)>=400)throw A.e(A.mn(null,"updateProduct ba\u015far\u0131s\u0131z ("+A.l(o)+")",p.b,p,null,B.kO))
