@@ -482,9 +482,24 @@ class _PriceListScreenState extends State<PriceListScreen> {
     }
 
     final api = context.read<ApiClient>();
+    final email = (api.session?.email ?? '').toString();
+    final userId = api.session?.userId ?? api.userId;
+    final dealerId = api.session?.dealerId ?? api.dealerId;
+
+    if (email.isEmpty) {
+      if (mounted && showErrorSnack) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Email bulunamadı (session boş).')),
+        );
+      }
+      return false;
+    }
+
     try {
       await _dio.post('user-product-prices/upsert', data: {
-        'email': api.session!.email.toString(),
+        'email': email,
+        if (userId != null && userId > 0) 'user_id': userId,
+        if (dealerId != null && dealerId > 0) 'dealer_id': dealerId,
         'product_variant_id': variantId,
         'price': price,
         'active': true,
@@ -841,9 +856,15 @@ class _PriceListScreenState extends State<PriceListScreen> {
       );
 
       final api = context.read<ApiClient>();
+      final email = (api.session?.email ?? '').toString();
+      final userId = api.session?.userId ?? api.userId;
+      final dealerId = api.session?.dealerId ?? api.dealerId;
       if (input.price != null) {
+        if (email.isEmpty) throw Exception('Email bulunamadı (session boş).');
         await _dio.post('user-product-prices/upsert', data: {
-          'email': api.session!.email.toString(),
+          'email': email,
+          if (userId != null && userId > 0) 'user_id': userId,
+          if (dealerId != null && dealerId > 0) 'dealer_id': dealerId,
           'product_variant_id': newId,
           'price': input.price,
           'active': true,
@@ -913,6 +934,9 @@ class _PriceListScreenState extends State<PriceListScreen> {
       }
 
       final api = context.read<ApiClient>();
+      final email = (api.session?.email ?? '').toString();
+      final userId = api.session?.userId ?? api.userId;
+      final dealerId = api.session?.dealerId ?? api.dealerId;
 
       final payload = <String, dynamic>{
         'name': form.name,
@@ -920,7 +944,7 @@ class _PriceListScreenState extends State<PriceListScreen> {
         if (imagePath != null) 'image': imagePath,
         'active': true,
         if (form.categoryId != null) 'category_ids': [form.categoryId],
-        'email': api.session!.email.toString(),
+        'email': email,
       };
 
       int productId = 0;
@@ -986,8 +1010,11 @@ class _PriceListScreenState extends State<PriceListScreen> {
         );
 
         if (variantId > 0 && form.variantPrice != null) {
+          if (email.isEmpty) throw Exception('Email bulunamadı (session boş).');
           await dio.post('user-product-prices/upsert', data: {
-            'email': api.session!.email.toString(),
+            'email': email,
+            if (userId != null && userId > 0) 'user_id': userId,
+            if (dealerId != null && dealerId > 0) 'dealer_id': dealerId,
             'product_variant_id': variantId,
             'price': form.variantPrice,
             'active': true,

@@ -44,7 +44,22 @@ class MarketController extends ChangeNotifier {
   String? detailImageName;
   bool uploadingDetailImage = false;
 
-  String get _email => api.session?.email?.toString() ?? '';
+  String get _email => api.session?.email.toString() ?? '';
+  int? get _userId {
+    final sid = api.session?.userId;
+    if (sid != null && sid > 0) return sid;
+    final pid = api.userId;
+    if (pid != null && pid > 0) return pid;
+    return null;
+  }
+
+  int? get _dealerId {
+    final sid = api.session?.dealerId;
+    if (sid != null && sid > 0) return sid;
+    final pid = api.dealerId;
+    if (pid != null && pid > 0) return pid;
+    return null;
+  }
 
   Future<void> init() async {
     await Future.wait([
@@ -511,6 +526,8 @@ class MarketController extends ChangeNotifier {
   // ---------------- SAVE (UPsert) ----------------
   Future<void> saveAllDirty({required ScaffoldMessengerState messenger}) async {
     final email = _email;
+    final userId = _userId;
+    final dealerId = _dealerId;
     if (email.isEmpty) {
       messenger.showSnackBar(
         const SnackBar(content: Text('Email bulunamadı (session boş).')),
@@ -530,6 +547,8 @@ class MarketController extends ChangeNotifier {
 
         await api.dio.post('user-product-prices/upsert', data: {
           'email': email,
+          if (userId != null) 'user_id': userId,
+          if (dealerId != null) 'dealer_id': dealerId,
           'product_variant_id': variantId,
           'price': price,
           'active': true,

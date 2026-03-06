@@ -1,9 +1,9 @@
 // lib/config.dart
 class AppConfig {
-  /// flutter run -d chrome --dart-define=API_ORIGIN=https://api.haldeki.com
+  /// flutter run -d chrome --dart-define=API_ORIGIN=http://172.20.10.5:8083/
   static const origin = String.fromEnvironment(
     'API_ORIGIN',
-    defaultValue: 'https://api.haldeki.com',
+    defaultValue: 'https://api.haldeki.com/',
   );
 
   static const apiVersion = 'v1/';
@@ -12,7 +12,7 @@ class AppConfig {
     defaultValue: 'https://cdn.haldeki.com',
   );
 
-  /// https://api.haldeki.com/api/v1
+  /// http://172.20.10.5:8083//api/v1
   static String get apiBase => '$origin/api/$apiVersion';
 
   /// Görsel URL builder (tek doğru nokta)
@@ -37,7 +37,8 @@ class AppConfig {
         const storageSegment = '/storage/';
         final storageIndex = pathOnly.indexOf(storageSegment);
         if (storageIndex >= 0) {
-          final relative = pathOnly.substring(storageIndex + storageSegment.length);
+          final relative =
+              pathOnly.substring(storageIndex + storageSegment.length);
           return join(imageBase, '/$relative');
         }
       }
