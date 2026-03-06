@@ -29976,7 +29976,7 @@ vg(a){var s,r,q,p,o,n,m,l,k="/storage/",j=B.c.b8(a)
 if(j.length===0)return""
 s=B.c.b8("https://cdn.haldeki.com")
 r=s.length!==0
-q=r?s:"https:/api.hadeki.com/"
+q=r?s:"https://api.haldeki.com/"
 p=new A.aap()
 if(B.c.cf(j,"http://")||B.c.cf(j,"https://")){if(r){o=A.bbU(j)
 n=o==null?null:o.gd3()
@@ -109104,7 +109104,7 @@ return A.u(A.au7(),$async$lb)
 case 2:a0=a3
 o.b!==$&&A.bu()
 o.b=a0
-m=A.b59("https:/api.hadeki.com//api/v1//",B.Yu,B.a8r,B.YB)
+m=A.b59("https://api.haldeki.com//api/v1//",B.Yu,B.a8r,B.YB)
 l=new A.Ry(A.a([B.UO],t.i6))
 l.P(l,B.a5z)
 l=new A.adV($,l,$,new A.ahP(51200),!1)
