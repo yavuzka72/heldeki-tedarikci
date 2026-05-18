@@ -31274,7 +31274,7 @@ w9(a){var s,r,q,p,o,n,m,l,k="/storage/",j=B.c.be(a)
 if(j.length===0)return""
 s=B.c.be("https://cdn.haldeki.com")
 r=s.length!==0
-q=r?s:"http://172.20.10.5:8083/"
+q=r?s:"https://api.haldeki.com/"
 p=new A.acN()
 if(B.c.c2(j,"http://")||B.c.c2(j,"https://")){if(r){o=A.bgr(j)
 n=o==null?null:o.gd8()
@@ -114309,10 +114309,10 @@ return A.v(A.axd(),$async$lE)
 case 2:a2=a5
 o.c!==$&&A.bu()
 o.c=a2
-m=A.aZY(A.aZ3("http://172.20.10.5:8083//api/v1//",B.zs,B.NR,B.zt))
+m=A.aZY(A.aZ3("https://api.haldeki.com//api/v1//",B.zs,B.NR,B.zt))
 o.a!==$&&A.bu()
 o.a=m
-l=A.aZY(A.aZ3("http://172.20.10.5:8083//api/distributor/v1//",B.zs,B.NR,B.zt))
+l=A.aZY(A.aZ3("https://api.haldeki.com//api/distributor/v1//",B.zs,B.NR,B.zt))
 o.b!==$&&A.bu()
 o.b=l
 k=a2.a
